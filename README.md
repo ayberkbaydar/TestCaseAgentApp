@@ -77,7 +77,7 @@ Windows için uygulama paketi şu an test aşamasındadır ve henüz yayınlanma
 ---
 
 ## 🪄 Lisans
-MIT License - Ayrıntılı bilgi için `LICENSE` dosyasına göz atabilirsiniz.
+[MIT License](./LICENSE) - Ayrıntılı bilgi için `LICENSE` dosyasına göz atabilirsiniz.
 
 ---
 
