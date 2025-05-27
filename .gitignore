@@ -1,0 +1,25 @@
+# Node.js
+electron-app/node_modules/
+electron-app/dist/
+
+# Python environment
+electron-app/myenv/
+*.pyc
+__pycache__/
+
+# Conda pack environment tar.gz
+testcase-agent-env.tar.gz
+
+# MacOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+*.log
+
+# OS-specific hidden files
+ehthumbs.db
+Thumbs.db

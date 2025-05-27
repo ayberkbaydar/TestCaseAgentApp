@@ -1,0 +1,32 @@
+{
+  "name": "testinel",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^34.3.0",
+    "electron-builder": "^24.12.0"
+  },
+  "build": {
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "../streamlit_app",
+        "to": "streamlit_app"
+      },
+      {
+      "from": "myenv",
+      "to": "myenv"
+      }
+    ],
+    "productName":"Testinel",
+      "mac": {
+    "target": ["dmg"],
+    "icon": "testinel_rounded.icns"
+  }
+  }
+}
