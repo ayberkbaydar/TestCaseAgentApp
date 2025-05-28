@@ -38,9 +38,10 @@ Electron.js + Streamlit entegrasyonu sayesinde, kullanıcı dostu bir masaüstü
 4. Keyifle kullan!
 
 ### 💻 Windows (.exe)
-💡 **Not:** 
-Windows için uygulama paketi şu an test aşamasındadır ve henüz yayınlanmadı.
-🟢 Yayınlandığında burada paylaşılacak.
+1. `.exe` dosyasını indir.
+[Testinel(Windows x64)](https://github.com/ayberkbaydar/TestCaseAgentApp/releases/download/v1.0.0/Testinel.Setup.1.0.0.exe)
+2. Çift tıklayarak yüklemeyi başlat.
+3. Yükleme tamamlandığında uygulamayı aç → Keyifle kullan!
 
 ---
 
