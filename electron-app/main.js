@@ -1,18 +1,29 @@
 const { app, BrowserWindow } = require("electron");
 const { spawn, execSync } = require("child_process");
 const path = require("path");
+const os = require("os");
 
 let python;
 
 function killPortProcess(port) {
   try {
-    // macOS ve Linux için lsof ile portu kullanan PID'leri bul
-    const stdout = execSync(`lsof -ti tcp:${port}`).toString();
-    const pids = stdout.split("\n").filter(Boolean);
-    pids.forEach((pid) => {
-      console.log(`Killing process on port ${port}: PID ${pid}`);
-      process.kill(pid, "SIGKILL");
+    if (os.platform()=="win32"){
+      const stdout = execSync(`netstat -ano | findstr :${port}`).toString();
+      const lines = stdout.split("\n").filter(line => line.trim() !== "");
+      lines.forEach(line => {
+        const pid = line.trim().split(/\s+/).pop();
+        console.log(`Killing process on port ${port}: PID ${pid}`);
+        execSync(`taskkill /PID ${pid} /F`);
     });
+    }
+    else if(os.platform()=="darwin" || os.platform()=="linux"){
+      const stdout = execSync(`lsof -ti tcp:${port}`).toString();
+      const pids = stdout.split("\n").filter(Boolean);
+      pids.forEach((pid) => {
+        console.log(`Killing process on port ${port}: PID ${pid}`);
+        process.kill(pid, "SIGKILL");
+    });
+    }
   } catch (error) {
     console.log(`No processes found on port ${port}.`);
   }
@@ -32,26 +43,54 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  // 🔴 Electron başlamadan önce 8501 portunu meşgul eden süreçleri öldür
   killPortProcess(8501);
 
 
 
 // DEVELOPMENT ENV
-//   const streamlitScript = path.resolve(__dirname, "../streamlit_app/app.py");
-//   ✅ Streamlit'i tam Python yoluyla başlat
-//   python = spawn("/Users/ayberkbaydar/.pyenv/shims/python3", ["-m", "streamlit", "run", streamlitScript]);
+  const streamlitScript = path.resolve(__dirname, "../streamlit_app/app.py");
+  let python;
+  if(os.platform()=="win32"){
+    python = spawn("C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python310\\python.exe", [
+    "-m", "streamlit", "run", streamlitScript,
+    "--server.headless", "true",
+    "--browser.serverAddress", "localhost",
+    "--browser.gatherUsageStats", "false"
+]);
+  }
+  else if(os.platform()=="darwin" || os.platform()=="linux"){
+    python = spawn("/Users/ayberkbaydar/.pyenv/shims/python3", ["-m", "streamlit", "run", streamlitScript]);
+  }
+  
 
 
-//PRODUCTION ENV
-  const pythonBin = path.join(process.resourcesPath, "myenv/bin/python3.12");
 
-  const streamlitScript = path.join(process.resourcesPath, "streamlit_app/app.py");
 
-  const python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript], {
-    // cwd: process.resourcesPath
-    cwd: path.join(process.resourcesPath, "streamlit_app")
-});
+
+// //PRODUCTION ENV
+//   const streamlitScript = path.join(process.resourcesPath, "streamlit_app/app.py");
+//   let pythonBin;
+//   let python;
+//   if(os.platform()=="win32"){
+//     pythonBin = path.join(process.resourcesPath, "myenv","python.exe");
+//     python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript,
+//     "--server.headless", "true",
+//     "--browser.serverAddress", "localhost",
+//     "--browser.gatherUsageStats", "false"
+//     ], {
+//       cwd: path.join(process.resourcesPath, "streamlit_app"),
+//       shell:true
+//     });
+//   }else if(os.platform()=="darwin" || os.platform()=="linux"){
+//     pythonBin = path.join(process.resourcesPath, "myenv/bin/python3.12");
+//     python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript], {
+//       cwd: path.join(process.resourcesPath, "streamlit_app")
+//     });
+//   }
+
+  
+
+  
 
 
 
@@ -68,13 +107,11 @@ app.whenReady().then(() => {
     app.quit();
   });
 
-  // Streamlit'in hazır olmasını bekleyip pencereyi aç
   setTimeout(() => {
     createWindow();
   }, 3000);
 });
 
-// 🔴 Uygulama kapatılırken streamlit sürecini öldür
 app.on("before-quit", () => {
   if (python) {
     console.log("Killing streamlit process...");

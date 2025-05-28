@@ -1,0 +1,13 @@
+prefix=/Users/ayberkbaydar/Desktop/TestCaseAgentApp/electron-app/myenv
+exec_prefix=/Users/ayberkbaydar/Desktop/TestCaseAgentApp/electron-app/myenv
+libdir=/Users/ayberkbaydar/Desktop/TestCaseAgentApp/electron-app/myenv/lib
+sharedlibdir=/Users/ayberkbaydar/Desktop/TestCaseAgentApp/electron-app/myenv/lib
+includedir=/Users/ayberkbaydar/Desktop/TestCaseAgentApp/electron-app/myenv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

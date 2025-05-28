@@ -13,20 +13,24 @@
   },
   "build": {
     "asar": true,
+    "productName": "Testinel",
     "extraResources": [
+      {
+        "from": "myenv",
+        "to": "myenv"
+      },
       {
         "from": "../streamlit_app",
         "to": "streamlit_app"
-      },
-      {
-      "from": "myenv",
-      "to": "myenv"
       }
     ],
-    "productName":"Testinel",
-      "mac": {
-    "target": ["dmg"],
-    "icon": "testinel_rounded.icns"
-  }
+    "mac": {
+      "target": ["dmg"],
+      "icon": "testinel_rounded.icns"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "testinel_rounded.ico"
+    }
   }
 }
