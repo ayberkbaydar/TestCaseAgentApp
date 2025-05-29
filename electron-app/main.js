@@ -47,46 +47,46 @@ app.whenReady().then(() => {
 
 
 
-// DEVELOPMENT ENV
-  const streamlitScript = path.resolve(__dirname, "../streamlit_app/app.py");
-  let python;
-  if(os.platform()=="win32"){
-    python = spawn("C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python310\\python.exe", [
-    "-m", "streamlit", "run", streamlitScript,
-    "--server.headless", "true",
-    "--browser.serverAddress", "localhost",
-    "--browser.gatherUsageStats", "false"
-]);
-  }
-  else if(os.platform()=="darwin" || os.platform()=="linux"){
-    python = spawn("/Users/ayberkbaydar/.pyenv/shims/python3", ["-m", "streamlit", "run", streamlitScript]);
-  }
+// // DEVELOPMENT ENV
+//   const streamlitScript = path.resolve(__dirname, "../streamlit_app/app.py");
+//   let python;
+//   if(os.platform()=="win32"){
+//     python = spawn("C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python310\\python.exe", [
+//     "-m", "streamlit", "run", streamlitScript,
+//     "--server.headless", "true",
+//     "--browser.serverAddress", "localhost",
+//     "--browser.gatherUsageStats", "false"
+// ]);
+//   }
+//   else if(os.platform()=="darwin" || os.platform()=="linux"){
+//     python = spawn("/Users/ayberkbaydar/.pyenv/shims/python3", ["-m", "streamlit", "run", streamlitScript]);
+//   }
   
 
 
 
 
 
-// //PRODUCTION ENV
-//   const streamlitScript = path.join(process.resourcesPath, "streamlit_app/app.py");
-//   let pythonBin;
-//   let python;
-//   if(os.platform()=="win32"){
-//     pythonBin = path.join(process.resourcesPath, "myenv","python.exe");
-//     python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript,
-//     "--server.headless", "true",
-//     "--browser.serverAddress", "localhost",
-//     "--browser.gatherUsageStats", "false"
-//     ], {
-//       cwd: path.join(process.resourcesPath, "streamlit_app"),
-//       shell:true
-//     });
-//   }else if(os.platform()=="darwin" || os.platform()=="linux"){
-//     pythonBin = path.join(process.resourcesPath, "myenv/bin/python3.12");
-//     python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript], {
-//       cwd: path.join(process.resourcesPath, "streamlit_app")
-//     });
-//   }
+//PRODUCTION ENV
+  const streamlitScript = path.join(process.resourcesPath, "streamlit_app/app.py");
+  let pythonBin;
+  let python;
+  if(os.platform()=="win32"){
+    pythonBin = path.join(process.resourcesPath, "myenv","python.exe");
+    python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript,
+    "--server.headless", "true",
+    "--browser.serverAddress", "localhost",
+    "--browser.gatherUsageStats", "false"
+    ], {
+      cwd: path.join(process.resourcesPath, "streamlit_app"),
+      shell:true
+    });
+  }else if(os.platform()=="darwin" || os.platform()=="linux"){
+    pythonBin = path.join(process.resourcesPath, "myenv/bin/python3.12");
+    python = spawn(pythonBin, ["-m", "streamlit", "run", streamlitScript], {
+      cwd: path.join(process.resourcesPath, "streamlit_app")
+    });
+  }
 
   
 

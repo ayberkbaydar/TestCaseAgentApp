@@ -60,8 +60,6 @@ Title: {title}
 Content:
 {content}
 """
-    
-    print(f"📝 Final Prompt:\n{prompt}", flush=True)
 
     try:
         response = client.chat.completions.create(
