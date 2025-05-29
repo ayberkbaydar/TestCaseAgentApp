@@ -67,7 +67,8 @@ Electron.js + Streamlit entegrasyonu sayesinde, kullanıcı dostu bir masaüstü
 ---
 
 ## 📸 Ekran Görüntüleri
-| ![Manual Entry](./screenshots/01.png) | ![Upload as JSON](./screenshots/02.png) |
+![Manual Entry](./screenshots/01.png)
+![Upload as JSON](./screenshots/02.png)
 
 ---
 
@@ -85,3 +86,4 @@ Electron.js + Streamlit entegrasyonu sayesinde, kullanıcı dostu bir masaüstü
 > ✨ Geliştirici: Ayberk Baydar  
 > ✉️ İletişim: ayberkbaydar1995@gmail.com  
 > 💼 LinkedIn: [ayberkbaydar](https://linkedin.com/in/ayberkbaydar)
+
